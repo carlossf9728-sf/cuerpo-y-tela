@@ -12,7 +12,6 @@ export const site = {
   // Quien escribe el blog y cómo se llama la sección.
   autora: {
     nombre: "Laura",
-    iniciales: "L",
     blog: "Por Laura",
     bio: "Escribo sobre lo que me pongo, lo que toco en las tiendas y lo que de verdad merece un sitio en el armario. Opinión, no catálogo.",
   },

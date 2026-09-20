@@ -8,6 +8,7 @@ import { site } from "@/content/site";
 import { ArticuloCard } from "@/components/ArticuloCard";
 import { Estrellas } from "@/components/Estrellas";
 import { Footer } from "@/components/Footer";
+import { IconoBlog } from "@/components/IconoBlog";
 
 const fmt = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "long", year: "numeric" });
 
@@ -23,8 +24,8 @@ export function Blog({ alSubir, alGaleria }: { alSubir: () => void; alGaleria: (
     <div className="flex min-h-full flex-col">
       <div className="container-editorial pt-24 md:pt-28">
         <div className="grid gap-10 md:grid-cols-[auto_1fr] md:items-end">
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-tinta font-display text-4xl italic text-lino md:h-28 md:w-28">
-            {site.autora.iniciales}
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-tinta text-lino md:h-28 md:w-28">
+            <IconoBlog className="h-14 w-14 md:h-16 md:w-16" />
           </div>
           <div>
             <p className="eyebrow">El blog</p>
