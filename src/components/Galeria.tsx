@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { tipos, urlFoto, type Pieza, type TipoPieza } from "@/content/galeria";
+import { enlaceCompra } from "@/content/afiliados";
 import type { Estrellas as NumEstrellas, Resumen } from "@/lib/valoraciones";
 import { useValoraciones } from "@/lib/useValoraciones";
 import { Estrellas } from "./Estrellas";
@@ -214,6 +215,29 @@ export function Galeria({
   );
 }
 
+// Botón «Ver en la tienda». Pasa por Awin si la marca tiene programa; en ese
+// caso lo avisamos (obligatorio) y marcamos el enlace como patrocinado.
+function BotonCompra({ pieza }: { pieza: Pieza }) {
+  const { url, afiliado } = enlaceCompra(pieza.marca, pieza.compra!);
+  return (
+    <div className="mt-6">
+      <a
+        href={url}
+        target="_blank"
+        rel={afiliado ? "sponsored noopener noreferrer" : "noopener noreferrer"}
+        className="flex items-center justify-center gap-2 rounded-full bg-tinta px-5 py-3 text-sm text-lino transition-colors hover:bg-arcilla"
+      >
+        {pieza.marca === "Marca no identificada" ? "Ver en la tienda" : `Ver en la tienda de ${pieza.marca}`} <span aria-hidden="true">↗</span>
+      </a>
+      {afiliado && (
+        <p className="mt-2 text-center text-[11px] text-humo">
+          Enlace de afiliado: si compras, podemos recibir una comisión sin coste para ti.
+        </p>
+      )}
+    </div>
+  );
+}
+
 // Ficha lateral: foto grande a la izquierda (en pantallas medianas y grandes)
 // y panel con opinión y "combina con" a la derecha.
 function Ficha({
@@ -281,6 +305,8 @@ function Ficha({
             <p className="eyebrow !text-arcilla">Con qué pega</p>
             <p className="mt-2 text-sm leading-relaxed">{pieza.combina}</p>
           </div>
+
+          {pieza.compra && <BotonCompra pieza={pieza} />}
 
           {relacionadas.length > 0 && (
             <div className="mt-8">

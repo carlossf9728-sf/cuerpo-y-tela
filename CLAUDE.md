@@ -10,6 +10,7 @@ Web de moda en Next.js (App Router, Tailwind v4, TypeScript). Ver `README.md` pa
 - Símbolo de fondo de la portada: `public/simbolo.png` (la figura recortada del logo). Si cambia el logo, regenerarlo también.
 - Valoraciones de lectores (1-5 estrellas por visitante) en Upstash Redis vía `src/lib/valoraciones.ts` y `/api/valoraciones`; sin variables de entorno usa memoria. "Nuestra nota" (`valoracion` en `galeria.ts`) es la de Laura (la autora) y no se mezcla con la de los lectores.
 - La barra de marcas de la portada (`src/content/marcas.ts`) es solo nombres. Todavía no hay sección de ofertas ni de marcas como tal: el usuario la quiere más adelante, no la añadas sin que la pida.
+- Afiliación: la web está aceptada en Awin (septiembre de 2026). `src/content/afiliados.ts` guarda el ID de publisher y los ID de anunciante por marca; `compra` en una pieza pinta el botón «Ver en la tienda» en su ficha y pasa por Awin (`rel="sponsored"` + aviso) si la marca tiene programa. `legal.afiliados` está a `true`.
 
 
 <!-- BEGIN:nextjs-agent-rules -->

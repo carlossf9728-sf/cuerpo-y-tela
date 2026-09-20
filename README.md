@@ -26,8 +26,13 @@ Abre http://localhost:3000.
 | Marcas de la barra en movimiento | `src/content/marcas.ts`                  |
 | Titular, NIF y dirección (aviso legal) y aviso de afiliados | `src/content/legal.ts` |
 | Quién firma el blog y su nombre («Por Laura») | `src/content/site.ts` (`autora`) |
+| ID de Awin y programas de afiliado por marca | `src/content/afiliados.ts`      |
 | Reglas del test "¿Qué te pones hoy?" | `src/lib/recomendar.ts`              |
 | Símbolo de fondo de la portada   | `public/simbolo.png` (figura del logo, fondo transparente) |
+
+### Enlaces de compra (afiliado)
+
+Pon `compra: "https://…"` en una pieza de `galeria.ts` con la URL de la tienda (del producto o de su categoría) y en su ficha aparecerá el botón «Ver en la tienda». Si la marca está en `programas` de `src/content/afiliados.ts` (con tu `publisherId` de Awin), el enlace pasa por Awin y se marca como de afiliado.
 
 ### Añadir una pieza a la galería
 

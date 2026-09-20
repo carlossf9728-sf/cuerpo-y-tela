@@ -10,5 +10,5 @@ export const legal = {
   actualizado: "2026-09-20",
   // Pon `true` cuando la web tenga enlaces de afiliado (Awin, Amazon…):
   // añade el aviso en el pie y el apartado correspondiente en la privacidad.
-  afiliados: false,
+  afiliados: true,
 };

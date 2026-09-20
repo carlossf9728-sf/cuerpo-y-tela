@@ -12,6 +12,9 @@
 //     `credito: "https://unsplash.com/photos/..."` (la página de la foto), o
 //   - propia: `foto: "/galeria/<archivo>.jpg"` guardada en `public/galeria/`.
 // Si la marca no se ve en la foto, escribe "Marca no identificada".
+// `compra` (opcional): URL de la tienda donde comprarla (o de la categoría, si
+// la foto no es de un producto concreto). Se convierte en enlace de afiliado
+// automáticamente si la marca está en `src/content/afiliados.ts`.
 
 export type TipoPieza =
   | "Vestidos"
@@ -35,6 +38,7 @@ export type Pieza = {
   valoracion: 1 | 2 | 3 | 4 | 5;
   opinion: string;
   combina: string;
+  compra?: string;
   destacada?: boolean;
 };
 
