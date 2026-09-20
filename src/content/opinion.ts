@@ -126,7 +126,7 @@ export const articulos: Articulo[] = [
         ],
       },
     ],
-    piezasRelacionadas: ["bolso-rojo-asa", "vaquero-levis-azul", "nike-air-max-roja"],
+    piezasRelacionadas: ["bolso-rojo-asa", "vaquero-azul-claro-recto", "nike-air-max-roja"],
   },
   {
     slug: "vestir-para-tu-cuerpo-no-contra-el",
@@ -157,7 +157,7 @@ export const articulos: Articulo[] = [
         ],
       },
     ],
-    piezasRelacionadas: ["vaquero-levis-azul", "cinturones-piel-marron", "salones-nude"],
+    piezasRelacionadas: ["vaquero-azul-claro-recto", "cinturones-piel-marron", "salones-nude"],
   },
 ];
 
