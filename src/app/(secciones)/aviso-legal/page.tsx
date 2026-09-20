@@ -3,10 +3,13 @@ import Link from "next/link";
 import { legal } from "@/content/legal";
 import { site } from "@/content/site";
 import { PaginaLegal } from "@/components/PaginaLegal";
+import { Nif } from "@/components/Nif";
 
 export const metadata: Metadata = {
   title: "Aviso legal",
   description: `Aviso legal y condiciones de uso de ${site.nombre}.`,
+  // Accesible desde el pie, pero fuera de los buscadores.
+  robots: { index: false, follow: false },
 };
 
 export default function AvisoLegalPage() {
@@ -16,9 +19,9 @@ export default function AvisoLegalPage() {
       <p>
         En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de que el sitio web <strong>{site.url.replace("https://", "")}</strong> (en adelante, «la web») es titularidad de:
       </p>
-      <ul>
+      <ul data-nosnippet="">
         <li>Titular: {legal.titular}</li>
-        <li>NIF: {legal.nif}</li>
+        <li>NIF: <Nif valor={legal.nif} /></li>
         <li>Domicilio: {legal.domicilio}</li>
         <li>Correo electrónico: <a href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>

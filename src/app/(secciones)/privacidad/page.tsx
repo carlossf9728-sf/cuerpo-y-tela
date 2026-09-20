@@ -19,7 +19,6 @@ export default function PrivacidadPage() {
       <h2>1. Responsable del tratamiento</h2>
       <ul>
         <li>Titular: {legal.titular}</li>
-        <li>NIF: {legal.nif}</li>
         <li>Domicilio: {legal.domicilio}</li>
         <li>Correo electrónico: <a href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>

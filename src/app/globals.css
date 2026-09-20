@@ -231,3 +231,13 @@ body {
 .legal a:hover {
   color: var(--color-arcilla);
 }
+
+/* NIF del aviso legal: pintado por CSS, no seleccionable. */
+.nif {
+  user-select: none;
+  -webkit-user-select: none;
+  letter-spacing: 0.04em;
+}
+.nif-c::before {
+  content: attr(data-c);
+}
