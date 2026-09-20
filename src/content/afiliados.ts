@@ -9,7 +9,7 @@
 //     anunciante ("Advertiser ID" / awinmid) tal y como aparece en Awin.
 // Las marcas que no estén aquí enlazan directamente a la tienda, sin afiliado.
 export const afiliados = {
-  publisherId: "",
+  publisherId: "3100730",
   programas: {} as Record<string, string>,
 };
 
