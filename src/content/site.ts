@@ -7,7 +7,7 @@ export const site = {
     "Cuerpo y Tela es una mirada personal a la moda femenina: una galería de prendas y productos que nos gustan, con opinión clara sobre cómo vestir.",
   email: "cuerpoytela26@gmail.com",
   instagram: "https://instagram.com/cuerpoytela",
-  tiktok: "https://tiktok.com/@cuerpoytela",
+  tiktok: "https://www.tiktok.com/@cuerpo.y.tela",
   url: "https://cuerpoytela.com",
   // Quien escribe el blog.
   autora: {
