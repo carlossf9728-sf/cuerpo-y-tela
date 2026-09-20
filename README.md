@@ -57,6 +57,7 @@ Copia un bloque de `src/content/opinion.ts`. `piezasRelacionadas` enlaza el art�
   2. **Galería**: todas las piezas agrupadas por tipo, con buscador, filtro por marca y orden; al tocar una se abre una ficha lateral con la opinión y con qué combinarla.
   3. **Blog de Ana Laura**: novedad, resto de artículos y sus recomendaciones (las piezas con cinco estrellas).
   Se puede entrar directamente en una escena con `/#galeria` o `/#blog` (es lo que usan el menú y el pie de las páginas interiores).
+  Al entrar por primera vez en la visita hay una **intro** de unos 5 segundos hecha con código (`src/components/escenas/Intro.tsx`): las letras C·Y·T se dibujan, aparece la figura y el logo vuela hasta la cabecera. Se salta con un toque y no se muestra a quien tiene "reducir movimiento" ni al entrar por `/#galeria` o `/#blog`.
   Todo esto vive en `src/components/escenas/`.
 - `/galeria` la galería suelta, con cabecera y pie (`/galeria?pieza=<slug>` abre una pieza)
 - `/opinion` listado · `/opinion/<slug>` artículo

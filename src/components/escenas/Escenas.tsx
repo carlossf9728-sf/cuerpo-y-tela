@@ -8,6 +8,7 @@ import { Logo } from "@/components/Logo";
 import { Galeria } from "@/components/Galeria";
 import { Inicio } from "./Inicio";
 import { Blog } from "./Blog";
+import { Intro } from "./Intro";
 
 // La portada son tres escenas a pantalla completa que no se recorren de
 // seguido: inicio, galería y blog. Al pasar de una a otra, la actual se
@@ -79,7 +80,7 @@ export function Escenas() {
   }
 
   function hayFichaAbierta(target: EventTarget | null) {
-    return target instanceof Element && target.closest("[role=dialog]") !== null;
+    return target instanceof Element && target.closest("[role=dialog], [data-intro]") !== null;
   }
 
   // Rueda: solo cambia de escena si ya estamos en el borde, llevamos un momento
@@ -119,7 +120,7 @@ export function Escenas() {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (document.querySelector("[role=dialog]")) return;
+      if (document.querySelector("[role=dialog], [data-intro]")) return;
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) return;
       const el = scrollers.current[activa];
       if (!el) return;
@@ -136,7 +137,7 @@ export function Escenas() {
       {/* Barra superior: logo y saltos entre escenas. */}
       <header className={`absolute inset-x-0 top-0 z-30 backdrop-blur transition-colors ${activa === 0 ? "bg-lino/60" : "border-b border-arena/70 bg-lino/85"}`}>
         <div className="container-editorial flex h-16 items-center justify-between">
-          <button type="button" onClick={() => ir(0)} aria-label="Inicio" className="flex items-center">
+          <button type="button" onClick={() => ir(0)} aria-label="Inicio" className="flex items-center" data-logo-cabecera>
             <Logo ancho={150} priority />
           </button>
           <nav className="flex items-center gap-4 text-sm md:gap-8" aria-label="Secciones">
@@ -219,6 +220,8 @@ export function Escenas() {
           </div>
         </section>
       ))}
+
+      <Intro destinoSelector="[data-logo-cabecera]" />
     </div>
   );
 }
