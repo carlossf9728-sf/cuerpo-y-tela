@@ -213,3 +213,21 @@ body {
 .intro-instantanea .intro-texto {
   transition: none;
 }
+
+/* Páginas legales */
+.legal h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1.1;
+  margin-top: 2.25rem;
+}
+.legal ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.legal a {
+  text-decoration: underline;
+}
+.legal a:hover {
+  color: var(--color-arcilla);
+}

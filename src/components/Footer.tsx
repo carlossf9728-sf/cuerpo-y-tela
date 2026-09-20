@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Logo } from "@/components/Logo";
+import { legal } from "@/content/legal";
 
 export function Footer() {
   return (
@@ -17,6 +18,12 @@ export function Footer() {
             <li><Link href="/#blog" className="hover:text-arcilla">Blog</Link></li>
             <li><Link href="/sobre" className="hover:text-arcilla">Sobre</Link></li>
           </ul>
+          <p className="eyebrow mb-4 mt-8">Legal</p>
+          <ul className="space-y-2">
+            <li><Link href="/aviso-legal" className="hover:text-arcilla">Aviso legal</Link></li>
+            <li><Link href="/privacidad" className="hover:text-arcilla">Privacidad</Link></li>
+            <li><Link href="/cookies" className="hover:text-arcilla">Cookies</Link></li>
+          </ul>
         </div>
         <div className="text-sm">
           <p className="eyebrow mb-4">Contacto</p>
@@ -29,7 +36,10 @@ export function Footer() {
       </div>
       <div className="container-editorial flex flex-col gap-2 border-t border-arena/70 py-6 text-xs text-humo md:flex-row md:justify-between">
         <p>© {new Date().getFullYear()} {site.nombre}. Todos los derechos reservados.</p>
-        <p>Fotografías de <a href="https://unsplash.com" target="_blank" rel="noreferrer" className="underline">Unsplash</a>. Las opiniones son personales.</p>
+        <p>
+          Fotografías de <a href="https://unsplash.com" target="_blank" rel="noreferrer" className="underline">Unsplash</a>. Las opiniones son personales.
+          {legal.afiliados && " Algunos enlaces a tiendas son de afiliado: si compras a través de ellos podemos recibir una comisión, sin coste para ti."}
+        </p>
       </div>
     </footer>
   );

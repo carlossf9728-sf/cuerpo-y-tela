@@ -24,6 +24,7 @@ Abre http://localhost:3000.
 | Icono de la app / favicon        | `src/app/icon.png`, `src/app/apple-icon.png`, `public/icon-*.png` |
 | Menú de navegación (páginas interiores) | `src/components/Header.tsx`       |
 | Marcas de la barra en movimiento | `src/content/marcas.ts`                  |
+| Titular, NIF y dirección (aviso legal) y aviso de afiliados | `src/content/legal.ts` |
 | Quién firma el blog (Ana Laura)  | `src/content/site.ts` (`autora`)         |
 | Reglas del test "¿Qué te pones hoy?" | `src/lib/recomendar.ts`              |
 | Símbolo de fondo de la portada   | `public/simbolo.png` (figura del logo, fondo transparente) |
@@ -62,6 +63,7 @@ Copia un bloque de `src/content/opinion.ts`. `piezasRelacionadas` enlaza el art�
 - `/galeria` la galería suelta, con cabecera y pie (`/galeria?pieza=<slug>` abre una pieza)
 - `/opinion` listado · `/opinion/<slug>` artículo
 - `/sobre`
+- `/aviso-legal`, `/privacidad`, `/cookies` (textos legales; los datos del titular se rellenan en `src/content/legal.ts`)
 
 Las páginas interiores están en `src/app/(secciones)/` y comparten cabecera y pie; la portada no los usa (tiene su propia barra).
 
