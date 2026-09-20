@@ -7,6 +7,7 @@ Web de moda en Next.js (App Router, Tailwind v4, TypeScript). Ver `README.md` pa
 - Logo: `public/logo.png` (PNG con fondo transparente, 932×347) a través de `src/components/Logo.tsx`; los iconos de app se derivan de la figura del logo. Si el usuario da un logo nuevo, hay que regenerar ambos.
 - La portada (`/`) son tres escenas a pantalla completa (inicio, galería, blog de Ana Laura) en `src/components/escenas/`; no se hace scroll continuo entre ellas: cada una se difumina para dar paso a la siguiente. Las páginas interiores con cabecera y pie están en `src/app/(secciones)/`.
 - Símbolo de fondo de la portada: `public/simbolo.png` (la figura recortada del logo). Si cambia el logo, regenerarlo también.
+- Valoraciones de lectores (1-5 estrellas por visitante) en Upstash Redis vía `src/lib/valoraciones.ts` y `/api/valoraciones`; sin variables de entorno usa memoria. "Nuestra nota" (`valoracion` en `galeria.ts`) es la de Ana Laura y no se mezcla con la de los lectores.
 - La barra de marcas de la portada (`src/content/marcas.ts`) es solo nombres. Todavía no hay sección de ofertas ni de marcas como tal: el usuario la quiere más adelante, no la añadas sin que la pida.
 
 

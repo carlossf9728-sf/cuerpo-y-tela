@@ -64,6 +64,14 @@ Copia un bloque de `src/content/opinion.ts`. `piezasRelacionadas` enlaza el art�
 
 Las páginas interiores están en `src/app/(secciones)/` y comparten cabecera y pie; la portada no los usa (tiene su propia barra).
 
+## Valoraciones de los lectores
+
+Cada visitante puede dar de 1 a 5 estrellas a una pieza desde su ficha (un voto por navegador, se puede cambiar). Se muestra junto a "nuestra nota", que sigue viniendo de `galeria.ts`.
+
+- Código: `src/lib/valoraciones.ts` (almacén), `src/lib/useValoraciones.ts` (navegador), `src/components/ValoracionLectores.tsx` (interfaz) y las rutas `src/app/api/valoraciones/`.
+- Los votos se guardan en **Upstash Redis**. En Vercel: proyecto → **Storage** → *Create Database* → **Upstash Redis** (plan gratuito) → conectar al proyecto. La integración crea sola las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN` (o `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`); hay que volver a desplegar después.
+- Sin esas variables (por ejemplo en local) los votos se guardan en memoria y se pierden al reiniciar: sirve para probar.
+
 ## Hacia la app
 
 - La web ya es instalable como PWA (`src/app/manifest.ts`): en el móvil, "Añadir a pantalla de inicio". El icono es la figura del logo sobre fondo lino.

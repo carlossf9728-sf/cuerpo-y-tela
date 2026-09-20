@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { tipos, urlFoto, type Pieza, type TipoPieza } from "@/content/galeria";
+import type { Estrellas as NumEstrellas, Resumen } from "@/lib/valoraciones";
+import { useValoraciones } from "@/lib/useValoraciones";
 import { Estrellas } from "./Estrellas";
+import { ResumenLectores, ValoracionLectores } from "./ValoracionLectores";
 
-type Orden = "tipo" | "valoracion" | "marca";
+type Orden = "tipo" | "valoracion" | "lectores" | "marca";
 
 // Galería con buscador, filtros por tipo y marca, orden y ficha lateral.
 // `inicial` abre directamente una pieza (se usa desde /galeria?pieza=<slug>).
@@ -44,6 +47,9 @@ export function Galeria({
     }
   }
 
+  const slugs = useMemo(() => piezas.map((p) => p.slug), [piezas]);
+  const { resumenes, misVotos, votar } = useValoraciones(slugs);
+
   const marcas = useMemo(
     () => Array.from(new Set(piezas.map((p) => p.marca))).sort((a, b) => a.localeCompare(b, "es")),
     [piezas],
@@ -59,9 +65,14 @@ export function Galeria({
         (q === "" || `${p.nombre} ${p.marca} ${p.tipo}`.toLowerCase().includes(q)),
     );
     if (orden === "valoracion") return [...lista].sort((a, b) => b.valoracion - a.valoracion);
+    if (orden === "lectores") {
+      const nota = (p: Pieza) => resumenes[p.slug]?.media ?? 0;
+      const votos = (p: Pieza) => resumenes[p.slug]?.votos ?? 0;
+      return [...lista].sort((a, b) => nota(b) - nota(a) || votos(b) - votos(a));
+    }
     if (orden === "marca") return [...lista].sort((a, b) => a.marca.localeCompare(b.marca, "es"));
     return lista;
-  }, [piezas, busqueda, tipo, marca, orden]);
+  }, [piezas, busqueda, tipo, marca, orden, resumenes]);
 
   // Con orden "por tipo" y sin tipo elegido, la rejilla va en bloques con título.
   const grupos = useMemo(() => {
@@ -118,7 +129,8 @@ export function Galeria({
           </Selector>
           <Selector valor={orden} onChange={(v) => setOrden(v as Orden)} etiqueta="Orden">
             <option value="tipo">Por tipo</option>
-            <option value="valoracion">Mejor valoradas</option>
+            <option value="valoracion">Nuestra nota</option>
+            <option value="lectores">Nota de los lectores</option>
             <option value="marca">Por marca</option>
           </Selector>
           <p className="ml-auto text-xs text-humo">
@@ -174,6 +186,7 @@ export function Galeria({
                   <p className="eyebrow mt-3 truncate">{p.marca}</p>
                   <h3 className="mt-0.5 truncate font-display text-xl leading-tight group-hover:text-arcilla">{p.nombre}</h3>
                   <Estrellas valor={p.valoracion} className="mt-1 text-sm" />
+                  <ResumenLectores resumen={resumenes[p.slug]} className="mt-0.5" />
                 </button>
               </li>
             ))}
@@ -188,6 +201,9 @@ export function Galeria({
           pieza={actual}
           posicion={indice >= 0 ? `${indice + 1} / ${visibles.length}` : null}
           relacionadas={piezas.filter((p) => p.marca === actual.marca && p.slug !== actual.slug && p.marca !== "Marca no identificada").slice(0, 4)}
+          resumen={resumenes[actual.slug]}
+          miVoto={misVotos[actual.slug]}
+          onVotar={(n) => votar(actual.slug, n)}
           onCerrar={cerrar}
           onMover={indice >= 0 ? mover : undefined}
           onAbrir={setAbierta}
@@ -204,6 +220,9 @@ function Ficha({
   pieza,
   posicion,
   relacionadas,
+  resumen,
+  miVoto,
+  onVotar,
   onCerrar,
   onMover,
   onAbrir,
@@ -211,6 +230,9 @@ function Ficha({
   pieza: Pieza;
   posicion: string | null;
   relacionadas: Pieza[];
+  resumen?: Resumen;
+  miVoto?: NumEstrellas;
+  onVotar: (n: NumEstrellas) => Promise<boolean>;
   onCerrar: () => void;
   onMover?: (delta: number) => void;
   onAbrir: (slug: string) => void;
@@ -247,8 +269,10 @@ function Ficha({
           <h2 className="mt-1 font-display text-3xl leading-tight md:text-4xl">{pieza.nombre}</h2>
           <div className="mt-3 flex items-center gap-3">
             <Estrellas valor={pieza.valoracion} className="text-xl" />
-            <span className="text-sm text-humo">{pieza.valoracion} de 5</span>
+            <span className="text-sm text-humo">Nuestra nota: {pieza.valoracion} de 5</span>
           </div>
+
+          <ValoracionLectores key={pieza.slug} resumen={resumen} miVoto={miVoto} onVotar={onVotar} />
 
           <p className="eyebrow mt-7">Nuestra opinión</p>
           <p className="mt-2 leading-relaxed">{pieza.opinion}</p>
