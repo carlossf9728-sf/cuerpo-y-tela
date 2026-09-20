@@ -3,9 +3,9 @@
 // obliga a identificar a quien está detrás de la web.
 export const legal = {
   // Persona física o empresa titular de la web.
-  titular: "[Nombre y apellidos o razón social]",
-  nif: "[NIF / CIF]",
-  domicilio: "[Calle, número, código postal y ciudad]",
+  titular: "Carlos Manuel Sánchez Fernández",
+  nif: "45119096L",
+  domicilio: "Rúa dos Irmáns Vilar Ponte, 1, 15702 Santiago de Compostela (A Coruña)",
   // Fecha de la última revisión de los textos legales (AAAA-MM-DD).
   actualizado: "2026-09-20",
   // Pon `true` cuando la web tenga enlaces de afiliado (Awin, Amazon…):
