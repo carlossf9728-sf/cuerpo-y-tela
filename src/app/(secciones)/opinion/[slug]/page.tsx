@@ -28,7 +28,7 @@ export default async function ArticuloPage({ params }: PageProps<"/opinion/[slug
 
   return (
     <article className="container-editorial py-12">
-      <Link href="/#blog" className="text-sm text-humo hover:text-arcilla">← Volver al blog de {site.autora.nombre}</Link>
+      <Link href="/#blog" className="text-sm text-humo hover:text-arcilla">← Volver a «{site.autora.blog}»</Link>
 
       <header className="mx-auto mt-8 max-w-2xl">
         <p className="eyebrow">Por {site.autora.nombre} · {articulo.tema} · {articulo.minutos} min · {fmt.format(new Date(articulo.fecha))}</p>

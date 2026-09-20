@@ -17,7 +17,7 @@ import { Intro } from "./Intro";
 const escenas = [
   { id: "inicio", etiqueta: "Inicio" },
   { id: "galeria", etiqueta: "Galería" },
-  { id: "blog", etiqueta: `Blog de ${site.autora.nombre}` },
+  { id: "blog", etiqueta: site.autora.blog },
 ] as const;
 
 const DURACION_TRANSICION = 1100; // ms hasta que se puede volver a cambiar
@@ -209,7 +209,7 @@ export function Escenas() {
                     pie={
                       <div className="mt-20 flex flex-col items-center gap-3 border-t border-arena/70 pt-12 text-center">
                         <p className="eyebrow">¿Seguimos?</p>
-                        <BotonBajar onClick={() => ir(2)}>Bajar al blog de {site.autora.nombre}</BotonBajar>
+                        <BotonBajar onClick={() => ir(2)}>Bajar a «{site.autora.blog}»</BotonBajar>
                       </div>
                     }
                   />

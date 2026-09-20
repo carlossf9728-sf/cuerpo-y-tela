@@ -11,7 +11,7 @@ import { Footer } from "@/components/Footer";
 
 const fmt = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "long", year: "numeric" });
 
-// Tercera escena: el blog de Ana Laura. Novedades, el resto de artículos
+// Tercera escena: «Por Laura», el blog. Novedades, el resto de artículos
 // y sus recomendaciones de la galería.
 export function Blog({ alSubir, alGaleria }: { alSubir: () => void; alGaleria: (p: Pieza) => void }) {
   const ordenados = [...articulos].sort((a, b) => b.fecha.localeCompare(a.fecha));
@@ -27,8 +27,8 @@ export function Blog({ alSubir, alGaleria }: { alSubir: () => void; alGaleria: (
             {site.autora.iniciales}
           </div>
           <div>
-            <p className="eyebrow">Lo que pensamos</p>
-            <h1 className="mt-2 font-display text-5xl leading-none md:text-7xl">El blog de {site.autora.nombre}</h1>
+            <p className="eyebrow">El blog</p>
+            <h1 className="mt-2 font-display text-5xl leading-none md:text-7xl">{site.autora.blog}</h1>
             <p className="mt-4 max-w-xl text-lg text-humo">{site.autora.bio}</p>
             <p className="mt-3 text-xs text-humo">Escribe sobre: {temas.join(" · ")}</p>
           </div>

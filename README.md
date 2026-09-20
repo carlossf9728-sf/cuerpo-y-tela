@@ -25,7 +25,7 @@ Abre http://localhost:3000.
 | Menú de navegación (páginas interiores) | `src/components/Header.tsx`       |
 | Marcas de la barra en movimiento | `src/content/marcas.ts`                  |
 | Titular, NIF y dirección (aviso legal) y aviso de afiliados | `src/content/legal.ts` |
-| Quién firma el blog (Ana Laura)  | `src/content/site.ts` (`autora`)         |
+| Quién firma el blog y su nombre («Por Laura») | `src/content/site.ts` (`autora`) |
 | Reglas del test "¿Qué te pones hoy?" | `src/lib/recomendar.ts`              |
 | Símbolo de fondo de la portada   | `public/simbolo.png` (figura del logo, fondo transparente) |
 
@@ -56,7 +56,7 @@ Copia un bloque de `src/content/opinion.ts`. `piezasRelacionadas` enlaza el art�
 - `/` portada en tres **escenas** a pantalla completa que no se recorren de seguido: al llegar al final de una y seguir bajando (rueda, flechas, deslizar o el botón), la escena se difumina y aparece la siguiente.
   1. **Inicio**: símbolo de Cuerpo y Tela de fondo, barra de marcas en movimiento y el test "¿Qué te pones hoy?" (tres respuestas → una pieza de la galería).
   2. **Galería**: todas las piezas agrupadas por tipo, con buscador, filtro por marca y orden; al tocar una se abre una ficha lateral con la opinión y con qué combinarla.
-  3. **Blog de Ana Laura**: novedad, resto de artículos y sus recomendaciones (las piezas con cinco estrellas).
+  3. **«Por Laura»** (el blog): novedad, resto de artículos y sus recomendaciones (las piezas con cinco estrellas).
   Se puede entrar directamente en una escena con `/#galeria` o `/#blog` (es lo que usan el menú y el pie de las páginas interiores).
   Al entrar por primera vez en la visita hay una **intro** de unos 5 segundos hecha con código (`src/components/escenas/Intro.tsx`): las letras C·Y·T se dibujan, aparece la figura y el logo vuela hasta la cabecera. Se salta con un toque y no se muestra a quien tiene "reducir movimiento" ni al entrar por `/#galeria` o `/#blog`.
   Todo esto vive en `src/components/escenas/`.

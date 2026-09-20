@@ -11,7 +11,6 @@ import { BotonBajar } from "./Escenas";
 // Primera escena: el símbolo de Cuerpo y Tela de fondo, el titular, el test
 // de 10 segundos y la barra de marcas en movimiento.
 export function Inicio({ alVerPieza, alBajar }: { alVerPieza: (p: Pieza) => void; alBajar: () => void }) {
-  const marcas = new Set(piezas.map((p) => p.marca).filter((m) => m !== "Marca no identificada")).size;
   const cincoEstrellas = piezas.filter((p) => p.valoracion === 5).length;
 
   return (
@@ -37,7 +36,7 @@ export function Inicio({ alVerPieza, alBajar }: { alVerPieza: (p: Pieza) => void
               Moda con <em className="text-arcilla">opinión</em>,<br />no con catálogo.
             </h1>
             <p className="mt-5 max-w-md text-base text-humo lg:text-lg">
-              {piezas.length} piezas de {marcas} marcas valoradas de 1 a 5 estrellas, con lo que pensamos de verdad y con qué las llevaríamos. Y el blog de {site.autora.nombre}, que no se calla nada.
+              {piezas.length} piezas valoradas de 1 a 5 estrellas, con lo que pensamos de verdad y con qué las llevaríamos. Y «{site.autora.blog}», el blog que no se calla nada.
             </p>
             <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
               {[

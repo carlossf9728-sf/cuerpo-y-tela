@@ -9,10 +9,11 @@ export const site = {
   instagram: "https://instagram.com/cuerpoytela",
   tiktok: "https://www.tiktok.com/@cuerpo.y.tela",
   url: "https://cuerpoytela.com",
-  // Quien escribe el blog.
+  // Quien escribe el blog y cómo se llama la sección.
   autora: {
-    nombre: "Ana Laura",
-    iniciales: "AL",
-    bio: "Escribo sobre lo que me pongo, lo que toco en las tiendas y lo que creo que merece la pena. Sin marcas que me paguen y sin catálogos: opinión.",
+    nombre: "Laura",
+    iniciales: "L",
+    blog: "Por Laura",
+    bio: "Escribo sobre lo que me pongo, lo que toco en las tiendas y lo que de verdad merece un sitio en el armario. Opinión, no catálogo.",
   },
 };
