@@ -29,10 +29,19 @@ Abre http://localhost:3000.
 | ID de Awin y programas de afiliado por marca | `src/content/afiliados.ts`      |
 | Reglas del test "¿Qué te pones hoy?" | `src/lib/recomendar.ts`              |
 | Símbolo de fondo de la portada   | `public/simbolo.png` (figura del logo, fondo transparente) |
+| Cifras y textos del media kit («Para marcas») | `src/content/paraMarcas.ts`     |
+| Tienda oficial de cada marca (botón «Ver en la tienda») | `src/content/tiendas.ts` |
+| Imagen que se ve al compartir el enlace | `src/app/opengraph-image.png`       |
+| Variables de entorno (base de datos, analítica, newsletter) | `.env.example`  |
 
 ### Enlaces de compra (afiliado)
 
-Pon `compra: "https://…"` en una pieza de `galeria.ts` con la URL de la tienda (del producto o de su categoría) y en su ficha aparecerá el botón «Ver en la tienda». Si la marca está en `programas` de `src/content/afiliados.ts` (con tu `publisherId` de Awin), el enlace pasa por Awin y se marca como de afiliado.
+El botón «Ver en la tienda» de cada ficha sale solo si sabemos a dónde enviar:
+
+1. `compra: "https://…"` en la pieza (tiene prioridad), o
+2. la tienda de su marca en `src/content/tiendas.ts` (así todas las piezas de Nike, Levi's, etc. tienen botón sin escribir nada pieza a pieza).
+
+Las piezas con marca «Marca no identificada» no llevan botón, a propósito. Si la marca está en `programas` de `src/content/afiliados.ts` (con tu `publisherId` de Awin), el enlace pasa por Awin y se marca como de afiliado con su aviso.
 
 ### Añadir una pieza a la galería
 
@@ -68,6 +77,7 @@ Copia un bloque de `src/content/opinion.ts`. `piezasRelacionadas` enlaza el art�
 - `/galeria` la galería suelta, con cabecera y pie (`/galeria?pieza=<slug>` abre una pieza)
 - `/opinion` listado · `/opinion/<slug>` artículo
 - `/sobre`
+- `/para-marcas` el media kit: qué ofreces a las marcas, cifras, formatos, normas y contacto. Se guarda como PDF con el botón «Descargar en PDF» (usa los estilos de impresión de `globals.css`).
 - `/aviso-legal`, `/privacidad`, `/cookies` (textos legales; los datos del titular se rellenan en `src/content/legal.ts`)
 
 Las páginas interiores están en `src/app/(secciones)/` y comparten cabecera y pie; la portada no los usa (tiene su propia barra).
@@ -79,6 +89,29 @@ Cada visitante puede dar de 1 a 5 estrellas a una pieza desde su ficha (un voto 
 - Código: `src/lib/valoraciones.ts` (almacén), `src/lib/useValoraciones.ts` (navegador), `src/components/ValoracionLectores.tsx` (interfaz) y las rutas `src/app/api/valoraciones/`.
 - Los votos se guardan en **Upstash Redis**. En Vercel: proyecto → **Storage** → *Create Database* → **Upstash Redis** (plan gratuito) → conectar al proyecto. La integración crea sola las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN` (o `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`); hay que volver a desplegar después.
 - Sin esas variables (por ejemplo en local) los votos se guardan en memoria y se pierden al reiniciar: sirve para probar.
+
+## Newsletter
+
+El formulario está en el pie de las páginas interiores y en la escena del blog (`src/components/Newsletter.tsx`). Guarda el correo, la fecha y desde dónde se apuntó, en la misma base de datos que las valoraciones (`src/lib/newsletter.ts`).
+
+- Pide consentimiento con casilla y enlace a la política de privacidad: es obligatorio y ya está puesto.
+- Para descargar la lista: define `NEWSLETTER_CLAVE` en las variables de entorno y abre `https://tu-dominio/api/newsletter?clave=LA-CLAVE` (devuelve un CSV). Sin esa variable, la descarga no existe.
+- Para dar de baja a alguien: `DELETE /api/newsletter?email=...`, o bórralo desde el panel de Upstash.
+
+## Estadísticas de visitas
+
+Sin cifras no hay conversación posible con una marca, así que conviene medir desde el primer día.
+
+1. Date de alta en [Plausible](https://plausible.io) (o monta uno propio) con el dominio `cuerpoytela.com`.
+2. En Vercel → Settings → Environment Variables, añade `NEXT_PUBLIC_ANALITICA_DOMINIO=cuerpoytela.com` y vuelve a desplegar.
+3. Da de alta la web también en [Google Search Console](https://search.google.com/search-console) para ver por qué te encuentran.
+
+Plausible **no usa cookies** ni recoge datos personales: por eso la web sigue sin banner de consentimiento y las páginas legales se ajustan solas cuando activas la variable. **No pongas Google Analytics**: usa cookies y obligaría a poner banner y a rehacer los textos legales.
+
+## Posicionamiento (SEO)
+
+- `src/app/sitemap.ts` genera `/sitemap.xml` con todas las páginas indexables; `src/app/robots.ts` genera `/robots.txt` (el aviso legal queda fuera del índice porque lleva datos fiscales).
+- `src/app/opengraph-image.png` es la imagen que aparece al compartir el enlace en WhatsApp, Instagram o un correo a una marca. Se regenera desde el logo si cambia la identidad.
 
 ## Hacia la app
 
