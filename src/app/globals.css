@@ -241,3 +241,39 @@ body {
 .nif-c::before {
   content: attr(data-c);
 }
+
+/* Impresión: la página «Para marcas» se guarda como PDF desde el navegador.
+   Quitamos cabecera, pie, formularios y botones, y dejamos el texto a una
+   columna sobre fondo blanco. */
+@media print {
+  header,
+  footer,
+  nav,
+  form,
+  .no-imprimir {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  main {
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  /* En papel, un enlace sin su dirección no sirve de nada. */
+  .container-editorial a[href^="http"]::after,
+  .container-editorial a[href^="mailto"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #555;
+    word-break: break-all;
+  }
+  section,
+  li {
+    break-inside: avoid;
+  }
+}

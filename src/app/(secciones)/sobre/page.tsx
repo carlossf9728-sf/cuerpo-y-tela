@@ -26,7 +26,11 @@ export default function SobrePage() {
             No vendemos nada ni nos paga nadie por lo que aparece aquí. Si algo está en la galería es porque nos gusta de verdad.
           </p>
         </div>
-        <div className="mt-10 flex flex-wrap gap-3">
+        <p className="mt-10 border-t border-arena/70 pt-6 text-sm text-humo">
+          ¿Eres una marca y quieres que probemos algo vuestro? Lo que ofrecemos y cómo trabajamos está en{" "}
+          <Link href="/para-marcas" className="underline hover:text-arcilla">Para marcas</Link>.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
           <Link href="/galeria" className="rounded-full bg-tinta px-6 py-3 text-sm text-lino hover:bg-arcilla">Ver la galería</Link>
           <a href={`mailto:${site.email}`} className="rounded-full border border-tinta px-6 py-3 text-sm hover:border-arcilla hover:text-arcilla">Escríbenos</a>
         </div>
