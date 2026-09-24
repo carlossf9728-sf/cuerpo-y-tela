@@ -10,10 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default function CookiesPage() {
+  const analitica = Boolean(process.env.NEXT_PUBLIC_ANALITICA_DOMINIO);
+
   return (
     <PaginaLegal eyebrow="Legal" titulo="Política de cookies">
       <p>
-        {site.nombre} <strong>no utiliza cookies propias</strong> ni cookies de analítica, publicidad o redes sociales. Por eso no verás ningún banner pidiendo consentimiento: no hay nada que consentir.
+        {site.nombre} <strong>no utiliza cookies propias</strong> ni cookies de publicidad o redes sociales. {analitica
+          ? "Las estadísticas de visitas se miden con Plausible Analytics, que tampoco usa cookies ni identifica a nadie. "
+          : ""}Por eso no verás ningún banner pidiendo consentimiento: no hay nada que consentir.
       </p>
 
       <h2>1. Qué guarda la web en tu navegador</h2>

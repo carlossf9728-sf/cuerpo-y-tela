@@ -10,10 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacidadPage() {
+  // La analítica solo existe si está configurada (ver `src/components/Analitica.tsx`).
+  const analitica = Boolean(process.env.NEXT_PUBLIC_ANALITICA_DOMINIO);
+
   return (
     <PaginaLegal eyebrow="Legal" titulo="Política de privacidad">
       <p>
-        Esta política explica qué datos se tratan al usar {site.nombre}, para qué y con qué derechos cuenta el usuario, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD). La web está pensada para tratar la menor cantidad posible de datos: no hay registro de usuarios, ni formularios, ni herramientas de analítica o publicidad.
+        Esta política explica qué datos se tratan al usar {site.nombre}, para qué y con qué derechos cuenta el usuario, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD). La web está pensada para tratar la menor cantidad posible de datos: no hay registro de usuarios ni publicidad, y el único formulario es el de la newsletter, que pide solo el correo.
       </p>
 
       <h2>1. Responsable del tratamiento</h2>
@@ -26,7 +29,12 @@ export default function PrivacidadPage() {
       <h2>2. Qué datos se tratan y para qué</h2>
       <p><strong>Contacto por correo electrónico.</strong> Si el usuario escribe a {site.email}, se tratan su dirección de correo, su nombre si lo indica y el contenido del mensaje, con la única finalidad de responderle. Base jurídica: el consentimiento del usuario al escribir (art. 6.1.a RGPD). Los mensajes se conservan mientras dure la conversación y, como máximo, un año después.</p>
       <p><strong>Valoraciones de los lectores.</strong> Al votar una prenda, la web guarda en el navegador del usuario un identificador aleatorio (sin nombre, correo ni ningún dato que lo identifique) y, en nuestra base de datos, ese identificador junto con la puntuación dada a cada prenda. Sirve solo para contar cada voto una vez y permitir cambiarlo. No se asocia a ninguna persona ni se combina con otros datos. Base jurídica: el interés legítimo en que las valoraciones sean fiables (art. 6.1.f RGPD). Estos datos se conservan mientras la web ofrezca valoraciones.</p>
+      <p><strong>Newsletter.</strong> Quien se apunta facilita su dirección de correo. Guardamos esa dirección, la fecha del alta y la página desde la que se apuntó (para poder acreditar el consentimiento), con la única finalidad de enviarle los avisos de la web. Base jurídica: el consentimiento expreso que se presta al marcar la casilla (art. 6.1.a RGPD) y el art. 21 LSSI-CE. El correo se conserva hasta que la persona se da de baja, algo que puede hacer en cualquier momento desde el enlace de cada envío o escribiendo a {site.email}. No se cede a terceros ni se usa para publicidad ajena.</p>
       <p><strong>Datos técnicos de navegación.</strong> Al cargar la web, el proveedor de alojamiento recibe, como cualquier servidor, la dirección IP y datos técnicos de la petición (navegador, página solicitada) para poder servir la página y protegerla frente a abusos. Base jurídica: interés legítimo (art. 6.1.f RGPD). Se conservan durante el tiempo limitado que establecen los registros técnicos del proveedor.</p>
+
+      {analitica && (
+        <p><strong>Estadísticas de visitas.</strong> Usamos Plausible Analytics, una herramienta que no instala cookies, no rastrea a las personas entre sitios web ni guarda direcciones IP: solo cuenta de forma agregada las páginas vistas y de dónde llega la visita. No permite identificar a nadie. Base jurídica: interés legítimo en conocer qué contenidos funcionan (art. 6.1.f RGPD).</p>
+      )}
 
       <h2>3. Destinatarios y encargados del tratamiento</h2>
       <p>No se ceden datos a terceros salvo obligación legal. Para funcionar, la web utiliza estos proveedores, que actúan como encargados del tratamiento con las garantías del RGPD:</p>
@@ -34,9 +42,12 @@ export default function PrivacidadPage() {
         <li><strong>Vercel Inc.</strong> (Estados Unidos): alojamiento y entrega de la web. Vercel está adherido al Marco de Privacidad de Datos UE-EE. UU. y aplica cláusulas contractuales tipo. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noreferrer">Política de privacidad de Vercel</a>.</li>
         <li><strong>Upstash Inc.</strong>: base de datos donde se almacenan las valoraciones, alojada en la Unión Europea (Fráncfort). <a href="https://upstash.com/trust/privacy.pdf" target="_blank" rel="noreferrer">Política de privacidad de Upstash</a>.</li>
         <li><strong>Unsplash</strong>: las fotografías de la galería se cargan desde sus servidores, que reciben la petición técnica (incluida la dirección IP) necesaria para mostrarlas. <a href="https://unsplash.com/privacy" target="_blank" rel="noreferrer">Política de privacidad de Unsplash</a>.</li>
+        {analitica && (
+          <li><strong>Plausible Insights OÜ</strong> (Estonia, Unión Europea): estadísticas de visitas sin cookies ni datos personales. <a href="https://plausible.io/privacy" target="_blank" rel="noreferrer">Política de privacidad de Plausible</a>.</li>
+        )}
         <li><strong>Google (Gmail)</strong>: el correo de contacto se gestiona en Gmail, por lo que los mensajes se almacenan en los servidores de Google.</li>
       </ul>
-      <p>Las tipografías de la web se sirven desde nuestros propios servidores, sin conexión a Google Fonts. No se utilizan herramientas de analítica, publicidad ni redes sociales integradas.</p>
+      <p>Las tipografías de la web se sirven desde nuestros propios servidores, sin conexión a Google Fonts. No se utiliza publicidad ni redes sociales integradas{analitica ? "" : ", ni herramientas de analítica"}.</p>
 
       {legal.afiliados && (
         <>
@@ -49,7 +60,7 @@ export default function PrivacidadPage() {
 
       <h2>{legal.afiliados ? "5" : "4"}. Derechos del usuario</h2>
       <p>
-        El usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a <a href={`mailto:${site.email}`}>{site.email}</a>, indicando el derecho que ejerce. En el caso de las valoraciones, como no podemos saber qué identificador corresponde a qué persona, el usuario puede borrar su identificador y sus votos eliminando los datos de este sitio en su navegador. También puede presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noreferrer">Agencia Española de Protección de Datos</a>.
+        El usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a <a href={`mailto:${site.email}`}>{site.email}</a>, indicando el derecho que ejerce; para darse de baja de la newsletter basta con el enlace que lleva cada envío. En el caso de las valoraciones, como no podemos saber qué identificador corresponde a qué persona, el usuario puede borrar su identificador y sus votos eliminando los datos de este sitio en su navegador. También puede presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noreferrer">Agencia Española de Protección de Datos</a>.
       </p>
 
       <h2>{legal.afiliados ? "6" : "5"}. Menores</h2>
