@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 
 import { createPortal } from "react-dom";
 import { tipos, urlFoto, type Pieza, type TipoPieza } from "@/content/galeria";
 import { enlaceCompra } from "@/content/afiliados";
+import { tiendaDe } from "@/content/tiendas";
 import type { Estrellas as NumEstrellas, Resumen } from "@/lib/valoraciones";
 import { useValoraciones } from "@/lib/useValoraciones";
 import { Estrellas } from "./Estrellas";
@@ -217,8 +218,8 @@ export function Galeria({
 
 // Botón «Ver en la tienda». Pasa por Awin si la marca tiene programa; en ese
 // caso lo avisamos (obligatorio) y marcamos el enlace como patrocinado.
-function BotonCompra({ pieza }: { pieza: Pieza }) {
-  const { url, afiliado } = enlaceCompra(pieza.marca, pieza.compra!);
+function BotonCompra({ pieza, destino }: { pieza: Pieza; destino: string }) {
+  const { url, afiliado } = enlaceCompra(pieza.marca, destino);
   return (
     <div className="mt-6">
       <a
@@ -227,7 +228,7 @@ function BotonCompra({ pieza }: { pieza: Pieza }) {
         rel={afiliado ? "sponsored noopener noreferrer" : "noopener noreferrer"}
         className="flex items-center justify-center gap-2 rounded-full bg-tinta px-5 py-3 text-sm text-lino transition-colors hover:bg-arcilla"
       >
-        {pieza.marca === "Marca no identificada" ? "Ver en la tienda" : `Ver en la tienda de ${pieza.marca}`} <span aria-hidden="true">↗</span>
+        Ver en la tienda de {pieza.marca} <span aria-hidden="true">↗</span>
       </a>
       {afiliado && (
         <p className="mt-2 text-center text-[11px] text-humo">
@@ -261,6 +262,9 @@ function Ficha({
   onMover?: (delta: number) => void;
   onAbrir: (slug: string) => void;
 }) {
+  // Enlace a la tienda: el propio de la pieza o, si no, el de su marca.
+  const compra = pieza.compra ?? tiendaDe(pieza.marca);
+
   return (
     <div className="ficha-fondo fixed inset-0 z-50 flex bg-tinta/80" role="dialog" aria-modal="true" aria-label={pieza.nombre} onClick={onCerrar}>
       <div className="relative hidden flex-1 items-center justify-center p-10 md:flex" onClick={(e) => e.stopPropagation()}>
@@ -306,7 +310,7 @@ function Ficha({
             <p className="mt-2 text-sm leading-relaxed">{pieza.combina}</p>
           </div>
 
-          {pieza.compra && <BotonCompra pieza={pieza} />}
+          {compra && <BotonCompra pieza={pieza} destino={compra} />}
 
           {relacionadas.length > 0 && (
             <div className="mt-8">

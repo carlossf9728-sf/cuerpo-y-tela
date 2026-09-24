@@ -260,13 +260,13 @@ export const piezas: Pieza[] = [
   // ───────────── Zapatillas ─────────────
   {
     slug: "nike-air-max-roja",
-    nombre: "Air Max 270 roja",
+    nombre: "Zapatilla roja de malla",
     marca: "Nike",
     tipo: "Zapatillas",
     foto: "photo-1542291026-7eec264c27ff",
     credito: U + "unpaired-red-nike-sneaker-164_6wVEHfI",
     valoracion: 4,
-    opinion: "Una zapatilla de color es la forma más barata de tener un look con carácter. La Air Max 270 es cómoda, con una cámara de aire visible que le da presencia.",
+    opinion: "Una zapatilla de color es la forma más barata de tener un look con carácter. Esta, de malla roja y suela blanca, es ligera y se lleva igual para andar que para el gimnasio.",
     combina: "Todo negro o todo gris: mallas, sudadera y abrigo neutro para que la zapatilla sea la protagonista.",
   },
   {
