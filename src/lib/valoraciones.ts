@@ -1,4 +1,5 @@
-import { Redis } from "@upstash/redis";
+import type { Redis } from "@upstash/redis";
+import { getRedis } from "./redis";
 
 // Valoraciones de los lectores: cada visitante puede dar de 1 a 5 estrellas a
 // una pieza (un voto por navegador, que se puede cambiar).
@@ -77,10 +78,9 @@ let almacen: Almacen | undefined;
 
 export function getAlmacen(): Almacen {
   if (almacen) return almacen;
-  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
-  if (url && token) {
-    almacen = almacenRedis(new Redis({ url, token }));
+  const redis = getRedis();
+  if (redis) {
+    almacen = almacenRedis(redis);
   } else {
     if (process.env.NODE_ENV === "production") {
       console.warn("Valoraciones: no hay base de datos configurada; los votos se guardan en memoria y se perderán.");

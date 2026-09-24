@@ -9,6 +9,7 @@ import { ArticuloCard } from "@/components/ArticuloCard";
 import { Estrellas } from "@/components/Estrellas";
 import { Footer } from "@/components/Footer";
 import { IconoBlog } from "@/components/IconoBlog";
+import { Newsletter } from "@/components/Newsletter";
 
 const fmt = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "long", year: "numeric" });
 
@@ -83,6 +84,21 @@ export function Blog({ alSubir, alGaleria }: { alSubir: () => void; alGaleria: (
             </div>
           </aside>
         </div>
+
+        <section className="mt-20 rounded-2xl border border-arena/70 bg-lino-oscuro/50 p-8 md:p-12">
+          <div className="grid gap-8 md:grid-cols-[1fr_1.1fr] md:items-center">
+            <div>
+              <p className="eyebrow">La carta de {site.autora.nombre}</p>
+              <h2 className="mt-2 font-display text-3xl leading-tight md:text-4xl">
+                Un correo cuando hay algo que merece la pena.
+              </h2>
+              <p className="mt-3 text-sm text-humo">
+                Las prendas nuevas de la galería y lo que se me pasa por la cabeza. Sin promociones disfrazadas y sin escribir por escribir.
+              </p>
+            </div>
+            <Newsletter origen="blog" />
+          </div>
+        </section>
 
         <div className="mt-20 flex justify-center">
           <button type="button" onClick={alSubir} className="text-sm text-humo hover:text-arcilla">↑ Volver al inicio</button>

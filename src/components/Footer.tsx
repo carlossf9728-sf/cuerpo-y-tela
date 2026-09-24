@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/content/site";
 import { Logo } from "@/components/Logo";
 import { legal } from "@/content/legal";
+import { Newsletter } from "@/components/Newsletter";
 
 export function Footer() {
   return (
@@ -10,6 +11,8 @@ export function Footer() {
         <div>
           <Logo ancho={200} />
           <p className="mt-3 max-w-xs text-sm text-humo">{site.lema}</p>
+          <p className="eyebrow mb-3 mt-8">La newsletter</p>
+          <Newsletter origen="pie" />
         </div>
         <div className="text-sm">
           <p className="eyebrow mb-4">Secciones</p>
@@ -17,6 +20,7 @@ export function Footer() {
             <li><Link href="/#galeria" className="hover:text-arcilla">Galería</Link></li>
             <li><Link href="/#blog" className="hover:text-arcilla">Blog</Link></li>
             <li><Link href="/sobre" className="hover:text-arcilla">Sobre</Link></li>
+            <li><Link href="/para-marcas" className="hover:text-arcilla">Para marcas</Link></li>
           </ul>
           <p className="eyebrow mb-4 mt-8">Legal</p>
           <ul className="space-y-2">
